@@ -20,3 +20,8 @@ export { default as ProfileSidebar } from "./ProfileSidebar";
 export { default as ProfileHeader } from "./ProfileHeader";
 export { default as UpdateInfo } from "./UpdateInfo";
 export { default as ChangePassword } from "./ChangePassword";
+export { default as PopupCart } from "./PopupCart";
+export { default as MiniCartItem } from "./MiniCartItem";
+export { default as CartOrderItem } from "./CartOrderItem";
+export { default as AddressList } from "./AddressList";
+export { default as EditAddressForm } from "./EditAddressForm";

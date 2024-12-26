@@ -1,7 +1,13 @@
 import { Label } from "../ui/label";
 import { RadioGroup, RadioGroupItem } from "../ui/radio-group";
 
-const CartPaymentMethod = () => {
+interface CartPaymentMethodProps {
+  onChangePaymentMethod: (method: string) => void;
+}
+
+const CartPaymentMethod: React.FC<CartPaymentMethodProps> = ({
+  onChangePaymentMethod,
+}) => {
   return (
     <div className="mt-6 sticky top-[20px] border-t-2 border-t-[#f1f1f1] ml-auto">
       {/* TITLE */}
@@ -12,11 +18,15 @@ const CartPaymentMethod = () => {
       </div>
       {/* FORM */}
       <div>
-        <RadioGroup defaultValue="cod">
+        <RadioGroup
+          defaultValue="cod"
+          onValueChange={(value) => onChangePaymentMethod(value)}
+        >
           <div className="flex items-center border border-[#d9d9d9] rounded-[12px] cursor-pointer h-[60px] py-[8px] px-[16px] transition-all duration-200 md:mb-[10px] mb-2">
             <RadioGroupItem
               value="cod"
               id="cod"
+              onChange={() => onChangePaymentMethod("cod")}
               className="h-[20px] w-[20px]"
             />
             <Label htmlFor="cod" className=" ml-2 flex items-center">

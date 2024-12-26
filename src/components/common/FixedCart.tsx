@@ -1,6 +1,10 @@
 import { Button } from "../ui/button";
 
-const FixedCart = () => {
+interface FixedCartProps {
+  onOrder: () => void;
+}
+
+const FixedCart: React.FC<FixedCartProps> = ({ onOrder }) => {
   return (
     <div className="fixed bottom-0 left-0 z-10 flex items-center bg-white justify-between w-full">
       <div className="w-[52%] flex h-[90px] py-[20px] items-center justify-between bg-[#eaedfa]">
@@ -32,7 +36,10 @@ const FixedCart = () => {
             </span>
           </span>
         </div>
-        <Button className="rounded-[50px] h-[55px] ml-[10px] px-[20px] py-[15px] uppercase w-[30%] font-semibold">
+        <Button
+          onClick={onOrder}
+          className="rounded-[50px] h-[55px] ml-[10px] px-[20px] py-[15px] uppercase w-[30%] font-semibold"
+        >
           Đặt hàng
         </Button>
       </div>

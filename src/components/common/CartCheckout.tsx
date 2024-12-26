@@ -1,9 +1,11 @@
-import { Link } from "react-router-dom";
+import { useCartStore } from "../../store/useCart";
 import { Button } from "../ui/button";
-import { FiTrash2 } from "react-icons/fi";
+
 import { Input } from "../ui/input";
+import CartOrderItem from "./CartOrderItem";
 
 const CartCheckout = () => {
+  const { carts } = useCartStore();
   return (
     <div className="">
       <div className="text-[30px] font-bold pr-[16px] my-8">Giỏ hàng</div>
@@ -22,70 +24,16 @@ const CartCheckout = () => {
       {/* LIST PRODUCT IN CART */}
       <div className="">
         <div className="mb-[20px]">
-          <div className="mb-[24px] pb-[21px] flex">
-            <div className="w-[120px]">
-              <div className="rounded-[2px]">
-                <img
-                  src="https://media3.coolmate.me/cdn-cgi/image/width=320,height=362,quality=80/uploads/December2024/24CMCW.SM011_-_Cam_10.jpg"
-                  alt=""
-                  className="rounded-[8px] max-w-full h-auto"
-                />
-              </div>
-            </div>
-            <div className="flex flex-col flex-1">
-              <div className="flex pl-[10px]">
-                <div className="mb-[20px]">
-                  <h3 className="text-black font-normal text-[16px] leading-5 mb-[2px] w-full">
-                    <Link to="/">Áo sơ mi Flannel 100% Cotton</Link>
-                  </h3>
-                  <div className="text-[14px] leading-[17.75px] text-[#717171]">
-                    Be Vàng / L
-                  </div>
-                </div>
-              </div>
-              <div className="flex items-center pl-[10px]">
-                <div className="flex items-center gap-[10px]">
-                  <div className="flex items-center">
-                    <span className="mr-4 flex items-center justify-center bg-[#f1f1f1] border border-[#f1f1f1] text-[16px] w-[100px] h-[36px] leading-[20px] px-[12px] rounded-[40px]">
-                      Vàng
-                    </span>
-                    <span className="flex items-center justify-center bg-[#f1f1f1] border border-[#f1f1f1] text-[16px] w-[100px] h-[36px] leading-[20px] px-[12px] rounded-[40px]">
-                      L
-                    </span>
-                  </div>
-                  <div className="flex justify-center px-[10px]">
-                    <div className="inline-flex items-center h-[36px] w-[120px] border border-[#d9d9d9] rounded-full">
-                      <span className="w-[36px] h-full flex items-center justify-center cursor-pointer ">
-                        -
-                      </span>
-                      <input
-                        type="text"
-                        className="w-[48px] text-center border-none outline-none"
-                        value={1}
-                        readOnly
-                      />
-                      <span className="w-[36px] h-full flex items-center justify-center cursor-pointer ">
-                        +
-                      </span>
-                    </div>
-                  </div>
-                  <div className="flex flex-col text-right">
-                    <span className="text-[#242424] text-[16px] font-bold leading-[20.29px]">
-                      531.000đ
-                    </span>
-                    <del className="text-[#ccc] ">531.000đ</del>
-                  </div>
-                </div>
-              </div>
-              <div className="items-end pt-1 pl-[8px]">
-                <span className="text-[14px] py-[4px] px-[8px] flex items-center cursor-pointer">
-                  {" "}
-                  <FiTrash2 />
-                  Xóa
-                </span>
-              </div>
-            </div>
-          </div>
+          {carts.details.map((item) => (
+            <CartOrderItem
+              key={item.id}
+              color={item.color}
+              size={item.size}
+              price={item.price}
+              quantity={item.quantity}
+              product={item.product}
+            />
+          ))}
         </div>
       </div>
 
@@ -107,7 +55,7 @@ const CartCheckout = () => {
       <div>
         <div className="flex justify-between mb-4">
           <p className="text-left">Tạm tính</p>
-          <p className="text-right">531.000đ</p>
+          <p className="text-right">{carts.totalAmount}đ</p>
         </div>
         <div className="flex justify-between mb-4">
           <p className="text-left">Giảm giá</p>
@@ -121,7 +69,7 @@ const CartCheckout = () => {
         <div className="flex justify-between mb-4">
           <p className="text-left font-medium">Tổng</p>
           <p className="text-right text-[1rem] text-black font-semibold">
-            531.000đ
+            {carts.totalAmount}đ
           </p>
         </div>
       </div>

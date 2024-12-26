@@ -9,14 +9,19 @@ import Auth from "./Auth";
 import { useSidebar } from "../../contexts/SideBarProvider";
 import { useEffect, useState } from "react";
 import useUserStore from "../../store/useUser";
+import PopupCart from "./PopupCart";
+import { useCartStore } from "../../store/useCart";
 
 const Header = () => {
   const { toggleSidebar } = useSidebar();
   const { fetchUser, user } = useUserStore();
+  const { fetchCarts, carts } = useCartStore();
   const [open, setOpen] = useState<boolean>(false);
+  const [isCartOpen, setIsCartOpen] = useState(false);
 
   useEffect(() => {
     fetchUser();
+    fetchCarts();
   }, []);
   return (
     <header className="h-auto left-0 right-0 fixed top-0 transition-all w-full z-10">
@@ -89,12 +94,19 @@ const Header = () => {
               )}
             </div>
             <div className="flex items-center h-[48px] justify-center relative w-[48px]">
-              <Button className="bg-transparent hover:bg-transparent px-0 py-0 w-full h-full ">
+              <Button
+                className="bg-transparent hover:bg-transparent px-0 py-0 w-full h-full relative"
+                onClick={() => setIsCartOpen(!isCartOpen)}
+              >
                 <img
                   src="https://www.coolmate.me/images/header/icon-cart-white-new.svg?v=1"
                   alt="cart button"
                   className="max-w-full h-auto"
                 />
+                <span className="absolute flex items-center justify-center bottom-[5px] right-[8px] w-[15px] h-[15px] pointer-events-none font-bold text-[10px] text-black rounded-full bg-[#f9f86c]">
+                  {carts.details?.length}
+                </span>
+                {isCartOpen && <PopupCart details={carts.details} />}
               </Button>
             </div>
           </div>

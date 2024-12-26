@@ -1,4 +1,3 @@
-import { Link } from "react-router-dom";
 import ReactHtmlParser from "react-html-parser";
 
 interface ProductDescriptionProps {
