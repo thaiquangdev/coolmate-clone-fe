@@ -8,3 +8,5 @@ export { default as OrderHistory } from "./OrderHistory";
 export { default as Address } from "./Address";
 export { default as Feedback } from "./Feedback";
 export { default as Faq } from "./Faq";
+export { default as ForgotPassword } from "./ForgotPassword";
+export { default as ResetPassword } from "./ResetPassword";

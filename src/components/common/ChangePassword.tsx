@@ -12,8 +12,11 @@ import {
 import { Input } from "../ui/input";
 import { Button } from "../ui/button";
 import { FaArrowRightLong } from "react-icons/fa6";
+import { useToast } from "../../hooks/use-toast";
+import { changePasswordApi } from "../../apis/userService";
 
 const ChangePassword = () => {
+  const { toast } = useToast();
   const form = useForm<z.infer<typeof changePasswordSchema>>({
     resolver: zodResolver(changePasswordSchema),
     defaultValues: {
@@ -25,6 +28,24 @@ const ChangePassword = () => {
 
   const onSubmit = (values: z.infer<typeof changePasswordSchema>) => {
     console.log(values);
+    if (values.newPassword !== values.oldPassword) {
+      toast({
+        title: "Lỗi",
+        description: "Mật khẩu mới và nhập lại mật khẩu không khớp",
+      });
+    }
+    changePasswordApi(values)
+      .then((res) => {
+        if (res.success) {
+          toast({
+            title: "Thành công",
+            description: "Thay đổi mật khẩu thành công",
+          });
+        }
+      })
+      .catch((err) => {
+        console.log(err);
+      });
   };
   return (
     <div>

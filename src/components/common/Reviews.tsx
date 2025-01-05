@@ -3,8 +3,14 @@ import { FaStarHalfAlt } from "react-icons/fa";
 import { IoIosArrowBack } from "react-icons/io";
 import { IoIosArrowForward } from "react-icons/io";
 import { Link } from "react-router-dom";
+import { ReviewType } from "../../types";
 
-const Reviews = () => {
+interface ReviewsProps {
+  avgRatings?: number;
+  reviews?: ReviewType[];
+}
+
+const Reviews: React.FC<ReviewsProps> = ({ avgRatings, reviews }) => {
   return (
     <div className="xl:px-[64px] max-w-[1920px] w-full">
       <div className="flex mt-[3rem]">
@@ -16,7 +22,7 @@ const Reviews = () => {
               </h5>
             </div>
             <div className="text-[64px] font-semibold leading-[5rem] text-center">
-              4.8
+              {avgRatings}
             </div>
             <div className="flex items-center mx-[-3px] justify-center mb-[0.44rem]">
               <FaStar size={34} color="#ffb403" />
@@ -26,7 +32,7 @@ const Reviews = () => {
               <FaStarHalfAlt size={34} color="#ffb403" />
             </div>
             <div className="text-[#4d4d4d] text-[14px] italic font-normal text-center">
-              294 đánh giá
+              {reviews?.length} đánh giá
             </div>
           </div>
         </div>
@@ -52,76 +58,54 @@ const Reviews = () => {
           </div>
           <div className="border-t border-t-[#ddd] mt-[32px] px-[5px] pt-[20px]">
             <div className="flex flex-row flex-wrap mx-[-9px]">
-              <div className="border-b border-b-[#d9d9d9] w-[50%] p-[9px]">
-                <div className="flex py-[9px]">
-                  <div className="flex-1">
-                    <div className="flex gap-1 items-center mx-[-3px] ">
-                      <FaStar size={24} />
-                      <FaStar size={24} />
-                      <FaStar size={24} />
-                      <FaStar size={24} />
-                      <FaStar size={24} />
-                    </div>
-                    <div className="text-black text-[14px] leading-[1.5em] mb-[25px] mt-[5px]">
-                      <div className="font-semibold">Thai Quang</div>
-                      <div className="text-[12px] italic font-normal text-[#989898]">
-                        Xanh Navy / 3XL, Xám / XL
+              {reviews?.map((item, index) => (
+                <div
+                  key={index}
+                  className="border-b border-b-[#d9d9d9] w-[50%] p-[9px]"
+                >
+                  <div className="flex py-[9px]">
+                    <div className="flex-1">
+                      <div className="flex gap-1 items-center mx-[-3px] ">
+                        {[...Array(item.star)].map((_, index) => (
+                          <FaStar key={index} size={24} color="gold" />
+                        ))}
                       </div>
-                    </div>
-                    <div className="text-black text-[14px] leading-[18px]">
-                      <p className="font-normal">
-                        Sản phẩm chất lượng tốt. Mẫu mã phù hợp nhiều độ tuổi
-                      </p>
-                      <span className="block mt-[20px] opacity-50">
-                        17.10.2024
-                      </span>
+                      <div className="text-black text-[14px] leading-[1.5em] mb-[25px] mt-[5px]">
+                        <div className="font-semibold">
+                          {item.user.fullName}
+                        </div>
+                        <div className="text-[12px] italic font-normal text-[#989898]">
+                          {item.color} / {item.size}
+                        </div>
+                      </div>
+                      <div className="text-black text-[14px] leading-[18px]">
+                        <p className="font-normal">{item.comment}</p>
+                        <span className="block mt-[20px] opacity-50">
+                          {item.createdAt}
+                        </span>
+                      </div>
                     </div>
                   </div>
                 </div>
-              </div>
-              <div className="border-b border-b-[#d9d9d9] w-[50%] p-[9px]">
-                <div className="flex py-[9px]">
-                  <div className="flex-1">
-                    <div className="flex gap-1 items-center mx-[-3px] ">
-                      <FaStar size={24} />
-                      <FaStar size={24} />
-                      <FaStar size={24} />
-                      <FaStar size={24} />
-                      <FaStar size={24} />
-                    </div>
-                    <div className="text-black text-[14px] leading-[1.5em] mb-[25px] mt-[5px]">
-                      <div className="font-semibold">Thai Quang</div>
-                      <div className="text-[12px] italic font-normal text-[#989898]">
-                        Xanh Navy / 3XL, Xám / XL
-                      </div>
-                    </div>
-                    <div className="text-black text-[14px] leading-[18px]">
-                      <p className="font-normal">
-                        Sản phẩm chất lượng tốt. Mẫu mã phù hợp nhiều độ tuổi
-                      </p>
-                      <span className="block mt-[20px] opacity-50">
-                        17.10.2024
-                      </span>
-                    </div>
-                  </div>
-                </div>
-              </div>
+              ))}
             </div>
-            <div className="flex items-center text-black text-[14px] justify-center leading-[18px] py-[20px] text-center">
-              <Link
-                to="#"
-                className="flex items-center justify-center w-[20px] h-[20px]"
-              >
-                <IoIosArrowBack />
-              </Link>
-              <span>1/30</span>
-              <Link
-                to="#"
-                className="flex items-center justify-center w-[20px] h-[20px]"
-              >
-                <IoIosArrowForward />
-              </Link>
-            </div>
+            {reviews && reviews.length > 10 && (
+              <div className="flex items-center text-black text-[14px] justify-center leading-[18px] py-[20px] text-center">
+                <Link
+                  to="#"
+                  className="flex items-center justify-center w-[20px] h-[20px]"
+                >
+                  <IoIosArrowBack />
+                </Link>
+                <span>1/30</span>
+                <Link
+                  to="#"
+                  className="flex items-center justify-center w-[20px] h-[20px]"
+                >
+                  <IoIosArrowForward />
+                </Link>
+              </div>
+            )}
           </div>
         </div>
       </div>

@@ -5,11 +5,13 @@ import {
   Cart,
   Faq,
   Feedback,
+  ForgotPassword,
   Home,
   Info,
   OrderHistory,
   ProductDetail,
   Products,
+  ResetPassword,
   Voucher,
 } from "../pages";
 import { Sidebar } from "../components/common";
@@ -30,6 +32,8 @@ const router = createBrowserRouter([
       { path: "products", element: <Products /> },
       { path: "product/:slug", element: <ProductDetail /> },
       { path: "cart", element: <Cart /> },
+      { path: "forgot-password", element: <ForgotPassword /> },
+      { path: "reset-password", element: <ResetPassword /> },
       {
         path: "account",
         element: (

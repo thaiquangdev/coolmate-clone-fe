@@ -9,6 +9,19 @@ export type ProductType = {
   images: ImageType[];
 };
 
+export type UserType = {
+  fullName: string;
+};
+
+export type ReviewType = {
+  star: number;
+  user: UserType;
+  color: string;
+  size: string;
+  comment: string;
+  createdAt: Date;
+};
+
 export type ProductDetailType = {
   id: number;
   title: string;
@@ -20,6 +33,7 @@ export type ProductDetailType = {
   discount: number;
   avgRating: number;
   highlights: string;
+  reviews: ReviewType[];
 };
 
 export type ProductSumaryType = {

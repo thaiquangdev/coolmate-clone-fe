@@ -48,7 +48,7 @@ const ProductDetail = () => {
         <ProductSuggestions />
       </section>
       <section id="reviews">
-        <Reviews />
+        <Reviews avgRatings={product?.avgRating} reviews={product?.reviews} />
       </section>
     </main>
   );

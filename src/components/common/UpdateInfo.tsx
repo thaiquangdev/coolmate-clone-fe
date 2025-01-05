@@ -13,11 +13,19 @@ import { RadioGroup, RadioGroupItem } from "../ui/radio-group";
 import { Slider } from "../ui/slider";
 import { Button } from "../ui/button";
 import { FaArrowRightLong } from "react-icons/fa6";
+import { updateProfileApi } from "../../apis/userService";
+import { useToast } from "../../hooks/use-toast";
 
 const UpdateInfo = () => {
+  const { toast } = useToast();
   const [day, setDay] = useState("");
   const [month, setMonth] = useState("");
   const [year, setYear] = useState("");
+  const [fullName, setFullName] = useState("");
+  const [gender, setGender] = useState("");
+  const [phoneNumber, setPhoneNumber] = useState("");
+  const [height, setHeight] = useState<number[]>([]);
+  const [weight, setWeight] = useState<number[]>([]);
 
   // Tạo danh sách ngày (1-31)
   const days = Array.from({ length: 31 }, (_, i) => i + 1);
@@ -27,6 +35,28 @@ const UpdateInfo = () => {
 
   // Tạo danh sách năm (1930-2009)
   const years = Array.from({ length: 2009 - 1930 + 1 }, (_, i) => 1930 + i);
+
+  const handleEditProfile = () => {
+    const dob = new Date(`${year}-${month}-${day}`);
+    console.log({ fullName, gender, dob, phoneNumber, height, weight });
+    updateProfileApi({
+      fullName,
+      gender,
+      dob,
+      phoneNumber,
+      height: height[0],
+      weight: weight[0],
+    })
+      .then((res) => {
+        toast({
+          title: "Thành công",
+          description: "Chỉnh sửa thông tin thành công",
+        });
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
 
   return (
     <div className="">
@@ -40,6 +70,8 @@ const UpdateInfo = () => {
           <Input
             placeholder="Nhập họ và tên"
             className="px-[2rem] py-[1rem] rounded-full"
+            value={fullName}
+            onChange={(e) => setFullName(e.target.value)}
           />
         </div>
 
@@ -99,9 +131,13 @@ const UpdateInfo = () => {
 
         {/* Giới tính */}
         <div className="mb-4">
-          <RadioGroup defaultValue="comfortable" className="flex">
+          <RadioGroup
+            defaultValue="nam"
+            onValueChange={(value) => setGender(value)}
+            className="flex"
+          >
             <div className="flex items-center space-x-2">
-              <RadioGroupItem value="name" id="name" />
+              <RadioGroupItem value="nam" id="nam" />
               <Label htmlFor="name">Nam</Label>
             </div>
             <div className="flex items-center space-x-2">
@@ -121,6 +157,8 @@ const UpdateInfo = () => {
           <Input
             placeholder="Nhập số điện thoại"
             className="px-[2rem] py-[1rem] rounded-full"
+            value={phoneNumber}
+            onChange={(e) => setPhoneNumber(e.target.value)}
           />
         </div>
 
@@ -130,13 +168,16 @@ const UpdateInfo = () => {
             <div className="w-[25%] flex flex-start">Chiều cao</div>
             <div className="w-[75%] flex items-center">
               <Slider
+                onValueChange={(value) => setHeight(value)}
                 defaultValue={[170]}
                 max={185}
                 min={140}
                 step={1}
                 className="w-full"
               />
-              <span className="text-[#2f5acf] font-semibold ml-4">170cm</span>
+              <span className="text-[#2f5acf] font-semibold ml-4">
+                {height[0]}cm
+              </span>
             </div>
           </div>
         </div>
@@ -144,23 +185,29 @@ const UpdateInfo = () => {
         {/* Cân nặng */}
         <div className="mb-4">
           <div className="flex items-center">
-            <div className="w-[25%] flex flex-start">Chiều cao</div>
+            <div className="w-[25%] flex flex-start">Cân nặng</div>
             <div className="w-[75%] flex items-center">
               <Slider
+                onValueChange={(value) => setWeight(value)}
                 defaultValue={[60]}
                 max={85}
                 min={40}
                 step={1}
                 className="w-full"
               />
-              <span className="text-[#2f5acf] font-semibold ml-4">60kg</span>
+              <span className="text-[#2f5acf] font-semibold ml-4">
+                {weight[0]}kg
+              </span>
             </div>
           </div>
         </div>
 
         {/* Nút lưu */}
         <div className="mt-6">
-          <Button className="uppercase w-full rounded-full font-bold h-[50px]">
+          <Button
+            onClick={handleEditProfile}
+            className="uppercase w-full rounded-full font-bold h-[50px]"
+          >
             Cập nhật tài khoản
             <FaArrowRightLong />
           </Button>

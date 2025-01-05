@@ -23,6 +23,7 @@ const Auth = ({ onClose }: { onClose?: () => void }) => {
   const { fetchUser } = useUserStore();
   const [isRegister, setIsRegister] = useState(false);
   const [step, setStep] = useState<"login" | "register" | "otp">("login");
+  const [open, setOpen] = useState(false);
   const navigate = useNavigate(); // Sử dụng useNavigate
 
   const form = useForm<z.infer<typeof registerSchema>>({
@@ -104,6 +105,11 @@ const Auth = ({ onClose }: { onClose?: () => void }) => {
         console.log(res);
       })
       .catch((err) => console.log(err));
+  };
+
+  const handleForgotPassword = () => {
+    navigate("/forgot-password");
+    onClose();
   };
 
   return (
@@ -220,6 +226,7 @@ const Auth = ({ onClose }: { onClose?: () => void }) => {
                 <Link
                   to="#"
                   className="cursor-pointer text-[#2f5acf] text-[16px] leading-5"
+                  onClick={handleForgotPassword}
                 >
                   Quên mật khẩu
                 </Link>
