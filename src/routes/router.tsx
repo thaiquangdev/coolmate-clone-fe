@@ -14,7 +14,7 @@ import {
   ResetPassword,
   Voucher,
 } from "../pages";
-import { Sidebar } from "../components/common";
+import { Search, Sidebar } from "../components/common";
 import ProfileLayout from "../components/layout/ProfileLayout";
 import ProtectedRoute from "./ProtectedRoute";
 
@@ -23,6 +23,7 @@ const router = createBrowserRouter([
     path: "/",
     element: (
       <>
+        <Search />
         <Sidebar />
         <MainLayout />
       </>

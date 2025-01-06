@@ -26,3 +26,4 @@ export { default as CartOrderItem } from "./CartOrderItem";
 export { default as AddressList } from "./AddressList";
 export { default as EditAddressForm } from "./EditAddressForm";
 export { default as ReviewProductList } from "./ReviewProductList";
+export { default as Search } from "./Search";

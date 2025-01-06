@@ -7,9 +7,11 @@ import {
 } from "../../lib/constrant";
 import { Input } from "../ui/input";
 import { Label } from "../ui/label";
+import useProductStore from "../../store/useProduct";
 
 const FilterProducts: React.FC = () => {
   const [searchParams, setSearchParams] = useSearchParams();
+  const setFilters = useProductStore((state) => state.setFilters);
 
   // Hàm xử lý thay đổi bộ lọc
   const handleFilterChange = (
@@ -35,6 +37,10 @@ const FilterProducts: React.FC = () => {
       searchParams.delete(type); // Xóa tham số nếu không có giá trị nào
     }
     setSearchParams(searchParams);
+    // Đồng bộ trạng thái bộ lọc với Zustand
+    setFilters({
+      [type]: updatedParams.length > 0 ? updatedParams.join(",") : null,
+    });
   };
 
   return (

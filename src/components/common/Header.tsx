@@ -11,11 +11,13 @@ import { useEffect, useState } from "react";
 import useUserStore from "../../store/useUser";
 import PopupCart from "./PopupCart";
 import { useCartStore } from "../../store/useCart";
+import { useSearch } from "../../contexts/SearchProvider";
 
 const Header = () => {
   const { toggleSidebar } = useSidebar();
   const { fetchUser, user } = useUserStore();
   const { fetchCarts, carts } = useCartStore();
+  const { openSearch } = useSearch();
   const [open, setOpen] = useState<boolean>(false);
   const [isCartOpen, setIsCartOpen] = useState(false);
 
@@ -59,6 +61,7 @@ const Header = () => {
             <div className="xl:block hidden">
               <label htmlFor="">
                 <Input
+                  onClick={openSearch}
                   placeholder="Tìm kiếm sản phẩm..."
                   autoComplete="off"
                   type="text"
