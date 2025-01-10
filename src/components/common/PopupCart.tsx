@@ -23,12 +23,12 @@ const PopupCart: React.FC<CartProps> = ({ details }) => {
         <div className="max-h-[460px] overflow-y-scroll p-4 w-[400px]">
           <div>
             <div className="flex items-center justify-between mb-4">
-              <span>{details.length} Sản phẩm</span>
+              <span>{details?.length} Sản phẩm</span>
               <Link to="/cart" className="text-[#2f5acf]">
                 Xem Tất cả
               </Link>
             </div>
-            {details.map((item) => (
+            {details?.map((item) => (
               <MiniCartItem
                 color={item.color}
                 size={item.size}

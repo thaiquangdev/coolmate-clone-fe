@@ -28,3 +28,16 @@ export const updateProfileApi = async (data: UpdateProfile) => {
   const response = await apiClient.put("/users/update-profile", data);
   return response.data;
 };
+
+export const forgotPasswordApi = async (email: string) => {
+  const response = await apiClient.post("/users/forgot-password", { email });
+  return response.data;
+};
+
+export const resetPasswordApi = async (token: string, newPassword: string) => {
+  const response = await apiClient.put("/users/reset-password", {
+    token,
+    newPassword,
+  });
+  return response.data;
+};

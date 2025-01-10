@@ -2,9 +2,13 @@ import { useState } from "react";
 import { Button } from "../components/ui/button";
 import { Input } from "../components/ui/input";
 import { useToast } from "../hooks/use-toast";
+import { resetPasswordApi } from "../apis/userService";
+import { useNavigate, useParams } from "react-router-dom";
 
 const ResetPassword = () => {
   const { toast } = useToast();
+  const { token } = useParams();
+  const navigate = useNavigate();
   const [newPassword, setNewpassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
 
@@ -30,7 +34,17 @@ const ResetPassword = () => {
       });
       return false;
     }
-    console.log(newPassword, confirmPassword);
+    resetPasswordApi(String(token), newPassword)
+      .then((res) => {
+        toast({
+          title: "Thành công",
+          description: "Cập nhật mật khẩu thành công. Hãy đăng nhập",
+        });
+        navigate("/");
+      })
+      .catch((err) => {
+        console.log(err);
+      });
   };
   return (
     <div className="flex items-center justify-center h-screen">

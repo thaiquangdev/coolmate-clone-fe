@@ -1,16 +1,36 @@
+import { useNavigate } from "react-router-dom";
+import { deleteAllProductInCart } from "../../apis/cartService";
 import { useCartStore } from "../../store/useCart";
 import { Button } from "../ui/button";
 
 import { Input } from "../ui/input";
 import CartOrderItem from "./CartOrderItem";
+import { useToast } from "../../hooks/use-toast";
 
 const CartCheckout = () => {
+  const navigate = useNavigate();
+  const { toast } = useToast();
   const { carts } = useCartStore();
+
+  const handleDeleteAllCart = () => {
+    deleteAllProductInCart()
+      .catch((res) => {
+        toast({
+          title: "Thành công",
+          description: "Xóa tất cả sản phẩm trong giỏ hàng thành công",
+        });
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+
   return (
     <div className="">
       <div className="text-[30px] font-bold pr-[16px] my-8">Giỏ hàng</div>
       <div className="border-b border-b-[#f1f1f1] justify-between flex text-[12px] font-medium mb-[12px] pb-[20px] uppercase">
         <Button
+          onClick={handleDeleteAllCart}
           variant={"ghost"}
           className="justify-start uppercase text-[12px]"
         >
@@ -32,6 +52,7 @@ const CartCheckout = () => {
               price={item.price}
               quantity={item.quantity}
               product={item.product}
+              id={item.id}
             />
           ))}
         </div>

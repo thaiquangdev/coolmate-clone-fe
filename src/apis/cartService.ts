@@ -20,7 +20,7 @@ export const addToCartApi = async (data: DataType) => {
 };
 
 type UpdateDataType = {
-  productDetailId: number;
+  cartDetailId: number;
   quantity: number;
 };
 

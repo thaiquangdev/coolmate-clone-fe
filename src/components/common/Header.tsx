@@ -99,17 +99,22 @@ const Header = () => {
             <div className="flex items-center h-[48px] justify-center relative w-[48px]">
               <Button
                 className="bg-transparent hover:bg-transparent px-0 py-0 w-full h-full relative"
-                onClick={() => setIsCartOpen(!isCartOpen)}
+                onClick={() => setIsCartOpen((prev) => !prev)} // Toggle trạng thái mở popup cart
               >
                 <img
                   src="https://www.coolmate.me/images/header/icon-cart-white-new.svg?v=1"
                   alt="cart button"
                   className="max-w-full h-auto"
                 />
-                <span className="absolute flex items-center justify-center bottom-[5px] right-[8px] w-[15px] h-[15px] pointer-events-none font-bold text-[10px] text-black rounded-full bg-[#f9f86c]">
-                  {carts.details?.length}
-                </span>
-                {isCartOpen && <PopupCart details={carts.details} />}
+                {carts.details?.length > 0 && ( // Chỉ hiển thị số lượng nếu có sản phẩm trong cart
+                  <span className="absolute flex items-center justify-center bottom-[5px] right-[8px] w-[15px] h-[15px] pointer-events-none font-bold text-[10px] text-black rounded-full bg-[#f9f86c]">
+                    {carts.details.length}
+                  </span>
+                )}
+                {isCartOpen &&
+                  carts.details?.length > 0 && ( // Chỉ hiển thị popup cart khi có sản phẩm
+                    <PopupCart details={carts.details} />
+                  )}
               </Button>
             </div>
           </div>

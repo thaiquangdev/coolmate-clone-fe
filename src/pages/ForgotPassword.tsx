@@ -2,6 +2,8 @@ import { useState } from "react";
 import { Button } from "../components/ui/button";
 import { Input } from "../components/ui/input";
 import { useToast } from "../hooks/use-toast";
+import { forgotPasswordApi } from "../apis/userService";
+import { useNavigate } from "react-router-dom";
 
 const ForgotPassword = () => {
   const { toast } = useToast();
@@ -15,7 +17,14 @@ const ForgotPassword = () => {
       });
       return false;
     }
-    console.log(email);
+    forgotPasswordApi(email)
+      .then((res) => {
+        toast({
+          title: "Thành công",
+          description: "Kiểm tra email của bạn",
+        });
+      })
+      .catch((err) => console.log(err));
   };
 
   return (
