@@ -1,8 +1,14 @@
+import iconFacebook from "../assets/icon-facebook.png";
+import iconZalo from "../assets/icon-zalo.png";
+import iconTiktok from "../assets/icon-tiktok.png";
+import iconInstagram from "../assets/icon-instagram.svg";
+import iconYoutube from "../assets/icon-youtube.svg";
+
 export const MenuHeader = [
   {
     id: 1,
-    title: "OUTLET",
-    url: "collection/:giam-gia",
+    title: "TRANG CHỦ",
+    url: "/",
   },
   {
     id: 2,
@@ -11,18 +17,101 @@ export const MenuHeader = [
   },
   {
     id: 3,
-    title: "ĐỒ LÓT",
-    url: "collection/:quan-lot-nam",
+    title: "BỘ SƯU TẬP",
+    url: "products",
+  },
+];
+
+export const navShirts = [
+  {
+    title: "Áo thun",
+    url: "products/ao-thun",
   },
   {
-    id: 4,
-    title: "ĐỒ THỂ THAO",
-    url: "collection/coolmate-activewear",
+    title: "Áo sơ mi",
+    url: "products/ao-so-mi",
   },
   {
-    id: 5,
-    title: "MẶC HẰNG NGÀY",
-    url: "collection/do-causual",
+    title: "Áo nỉ",
+    url: "products/ao-ni",
+  },
+  {
+    title: "Áo polo",
+    url: "products/ao-polo",
+  },
+  {
+    title: "Áo dài tay",
+    url: "products/ao-dai-tay",
+  },
+  {
+    title: "Áo khoác",
+    url: "products/ao-khoac",
+  },
+  {
+    title: "Áo Tanktop",
+    url: "products/ao-tanktop",
+  },
+  {
+    title: "Áo thể thao",
+    url: "products/ao-the-thao",
+  },
+];
+
+export const navTrousers = [
+  {
+    title: "Quần shorts",
+    url: "products/quan-shorts",
+  },
+  {
+    title: "Quần dài",
+    url: "products/quan-dai",
+  },
+  {
+    title: "Quần jean",
+    url: "products/quan-jean",
+  },
+  {
+    title: "Quần kaki",
+    url: "products/quan-kaki",
+  },
+  {
+    title: "Quần jogger",
+    url: "products/quan-jogger",
+  },
+  {
+    title: "Quần thể thao",
+    url: "products/quan-the-thao",
+  },
+  {
+    title: "Quần lót",
+    url: "products/quan-lot",
+  },
+  {
+    title: "Quần bơi",
+    url: "products/quan boi",
+  },
+];
+
+export const navAccessories = [
+  {
+    title: "Tất/Vớ",
+    url: "products/tat-vo",
+  },
+  {
+    title: "Mũ/Nón",
+    url: "products/mu-non",
+  },
+  {
+    title: "Túi",
+    url: "products/tui",
+  },
+  {
+    title: "Ví/Thắt lưng",
+    url: "products/vi-that-lung",
+  },
+  {
+    title: "Ly/Cốc",
+    url: "products/ly-coc",
   },
 ];
 
@@ -325,5 +414,28 @@ export const faqs = [
     title:
       "Tôi mua hàng trên các sàn thương mại điện tử có được tích lũy chi tiêu CoolClub không?",
     des: "Trong thời điểm hiện tại, chương trình CoolClub chỉ dành cho các khách hàng mua hàng tại Website Coolmate, chưa áp dụng với các khách hàng mua hàng tại các sàn thương mại điện tử.",
+  },
+];
+
+export const iconFooters = [
+  {
+    id: 1,
+    url: iconFacebook,
+  },
+  {
+    id: 2,
+    url: iconZalo,
+  },
+  {
+    id: 3,
+    url: iconTiktok,
+  },
+  {
+    id: 4,
+    url: iconInstagram,
+  },
+  {
+    id: 5,
+    url: iconYoutube,
   },
 ];

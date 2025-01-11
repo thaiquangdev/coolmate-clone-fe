@@ -1,7 +1,12 @@
 import { RiMenu2Fill } from "react-icons/ri";
 import { RiSearchLine } from "react-icons/ri";
 import { Link } from "react-router-dom";
-import { MenuHeader } from "../../lib/constrant";
+import {
+  MenuHeader,
+  navAccessories,
+  navShirts,
+  navTrousers,
+} from "../../lib/constrant";
 import { Input } from "../ui/input";
 import { Button } from "../ui/button";
 import { Dialog, DialogTrigger } from "../ui/dialog";
@@ -46,14 +51,93 @@ const Header = () => {
           </div>
           {/* MENU */}
           <div className="lg:block hidden">
-            <ul className="mr-[10px] flex items-center justify-center opacity-1">
-              {MenuHeader.map((item) => (
-                <li className="flex items-center cursor-auto text-[16px] py-[31px] px-[16px] text-white max-h-[82px]">
-                  <Link to={item.url} className="relative text-[14px]">
-                    {item.title}
+            <ul className="mr-[10px] flex items-center justify-center opacity-1 relative">
+              {/* Trang chủ */}
+              <li className="flex items-center cursor-auto text-[16px] py-[31px] px-[16px] text-white max-h-[82px]">
+                <Link to="/" className="relative text-[14px]">
+                  TRANG CHỦ
+                </Link>
+              </li>
+
+              {/* Sản phẩm */}
+              <li className="group flex items-center cursor-auto text-[16px] py-[31px] px-[16px] text-white max-h-[82px] relative">
+                <Link to="/products" className="relative text-[14px]">
+                  SẢN PHẨM
+                </Link>
+                {/* Sub-menu Sản phẩm */}
+                <div className="absolute top-[82px] left-0 bg-white shadow-lg hidden group-hover:flex  min-w-[600px]">
+                  <div className="w-1/3 flex flex-col">
+                    <p className="py-2 px-4 text-black font-bold text-[20px]">
+                      Áo Nam
+                    </p>
+                    {navShirts.map((item) => (
+                      <Link
+                        key={item.title}
+                        to={item.url}
+                        className="px-4 py-1 hover:bg-gray-200 text-black text-[14px]"
+                      >
+                        {item.title}
+                      </Link>
+                    ))}
+                  </div>
+                  <div className="w-1/3 flex flex-col">
+                    <p className="py-2 px-4 text-black font-bold text-[20px]">
+                      Quần Nam
+                    </p>
+                    {navTrousers.map((item) => (
+                      <Link
+                        key={item.title}
+                        to={item.url}
+                        className="px-4 py-1 hover:bg-gray-200 text-black text-[14px]"
+                      >
+                        {item.title}
+                      </Link>
+                    ))}
+                  </div>
+                  <div className="w-1/3 flex flex-col">
+                    <p className="py-2 px-4 text-black font-bold text-[20px]">
+                      Phụ khiện Nam
+                    </p>
+                    {navAccessories.map((item) => (
+                      <Link
+                        key={item.title}
+                        to={item.url}
+                        className="px-4 py-1 hover:bg-gray-200 text-black text-[14px]"
+                      >
+                        {item.title}
+                      </Link>
+                    ))}
+                  </div>
+                </div>
+              </li>
+
+              {/* Bộ sưu tập */}
+              <li className="group flex items-center cursor-auto text-[16px] py-[31px] px-[16px] text-white max-h-[82px] relative">
+                <Link to="#" className="relative text-[14px]">
+                  BỘ SƯU TẬP
+                </Link>
+                {/* Sub-menu Bộ sưu tập */}
+                <div className="absolute top-[82px] left-0 bg-white shadow-lg hidden group-hover:flex flex-col min-w-[200px]">
+                  <Link
+                    to="/collections/summer"
+                    className="px-4 py-2 hover:bg-gray-200 text-black"
+                  >
+                    Bộ sưu tập mùa hè
                   </Link>
-                </li>
-              ))}
+                  <Link
+                    to="/collections/winter"
+                    className="px-4 py-2 hover:bg-gray-200 text-black"
+                  >
+                    Bộ sưu tập mùa đông
+                  </Link>
+                  <Link
+                    to="/collections/sport"
+                    className="px-4 py-2 hover:bg-gray-200 text-black"
+                  >
+                    Bộ sưu tập thể thao
+                  </Link>
+                </div>
+              </li>
             </ul>
           </div>
           {/* ACTIONS */}
